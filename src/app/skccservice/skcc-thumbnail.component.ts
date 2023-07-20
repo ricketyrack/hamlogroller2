@@ -16,7 +16,7 @@ export class SkccThumbnailComponent {
   @Input() skcc : ISkcc | undefined;
 
   constructor(private routerLink: ActivatedRoute) {
-
+    console.log("created new skcc thumbnail");
   }
 }
 

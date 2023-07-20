@@ -1,1 +1,47 @@
-/* You can add global styles to this file, and also import other style files */
+@import "custom-variables";
+
+html, body {
+  font-family: $font-family-base;
+}
+
+$disabled-background: #8f8f8f;
+
+.item-box {
+  margin-bottom: 10px;
+  border: 1px solid $border-color-default;
+  background-color: $brand-default;
+  border-radius: $border-radius-default;
+  filter: drop-shadow(16px 16px 10px $border-color-default);
+  padding: 10px;
+}
+
+.thumbnail {
+  margin-bottom: 10px;
+  border: 1px solid $border-color-default;
+  background-color: $brand-default;
+  border-radius: $border-radius-default;
+  filter: drop-shadow(16px 16px 10px $border-color-default);
+  padding: 10px;
+  min-height: 50px;
+}
+
+.title-bar {
+  background: $brand-warning;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  margin-bottom: 10px;
+  border-radius: $border-radius-default;
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-top: 5px;
+}
+
+.title-component {
+  padding-top: 15px;
+}
+
+button {
+  background-color: $brand-primary;
+  color: $brand-default;
+  border-radius: $border-radius-default;
+}

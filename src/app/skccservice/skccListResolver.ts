@@ -7,5 +7,5 @@ import { map } from 'rxjs/operators'
 export const skccListResolver: ResolveFn<ISkcc[]> =
   (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) =>
   {
-	    return inject(SkccService).getSkccPage('').pipe(map(skcc => skcc))
+    return inject(SkccService).getSkccPage('').pipe(map(skccs => skccs));
   }

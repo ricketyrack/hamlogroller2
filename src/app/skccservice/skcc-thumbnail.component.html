@@ -1,8 +1,9 @@
 <div [routerLink]="['/skcc', skcc?.membernbr]" class="hoverwell thumbnail">
-  <h4>{{skcc?.callsign}}</h4>
   <div class="row">
-    <div class="col-md-4">{{skcc?.membernbr}}</div>
-    <div class="col-md-4">{{skcc?.statecd}}</div>
-    <div class="col-md-4">{{skcc?.memberlevel}}</div>
+    <div class="col-sm-2 col-md-4">Call: {{skcc?.callsign}}</div>
+    <div class="col-sm-2 col-md-8">Name: {{skcc?.name}}</div>
+    <div class="col-sm-2 col-md-4">Id#: {{skcc?.membernbr}}</div>
+    <div class="col-sm-2 col-md-4">Exch: {{skcc?.statecd}}</div>
+    <div class="col-sm-2 col-md-2">{{skcc?.memberlevel}}</div>
   </div>
 </div>

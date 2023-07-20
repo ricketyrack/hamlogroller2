@@ -40,27 +40,24 @@ export class SkccService {
 
   } // getSkccs
 
-  saveSkcc(skccForm: FormGroup): boolean {
+  saveSkcc(skcc: ISkcc): boolean {
 
-    console.log(`saving skcc: ${skccForm.value}`);
+    console.log(`saving skcc callsign: ${skcc?.callsign} member #: ${skcc?.membernbr}`);
+
+    localStorage.setItem(skcc.membernbr.toString(), JSON.stringify(skcc));
 
     return true;
   } // saveSkcc
 
-  getSkcc(memberNumber: number) : any {
+  getSkcc(memberNumber: number) : ISkcc | undefined {
 
     console.log('skcc-service: looking for skcc member#:' + memberNumber);
 
     const theSkcc = localStorage.getItem(memberNumber.toString());
 
-    let thisSkcc: any = undefined;
+    let result: ISkcc | undefined = theSkcc ? JSON.parse(theSkcc as string) as ISkcc : undefined;
 
-    if (theSkcc !== undefined) {
-      const strSkcc = theSkcc ? theSkcc : '';
-      thisSkcc = JSON.parse(strSkcc) as ISkcc;
-    }
-
-    return thisSkcc;
+    return result;
 
   } // getSkcc
 
@@ -69,16 +66,11 @@ export class SkccService {
     console.log(`skcc-service: requesting a new page with first call: ${firstCall}`);
 
     return this.http.get<ISkcc[]>('http://localhost:3000/skccpage',
-               { params: new HttpParams().set('firstcall', firstCall)})
-      .pipe(
-        retry(3),
-        catchError(this.handleError)
-      );
-
+      { params: new HttpParams().set('firstcall', firstCall) });
   }
 
   setSkccList(skccList : ISkcc[]) {
-    console.log('set skcc list is not imlemented');
+    console.log('set skcc list is not implemented');
   }
 
 }
