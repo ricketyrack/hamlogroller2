@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core'
 import { SkccService } from './skcc.service'
 import { ISkcc } from './skcc.model'
 import { ActivatedRoute } from '@angular/router'
-import { SkccThumbnailComponent } from './skcc-thumbnail.component'
 
 @Component({
   selector: 'skcc-list',
@@ -19,12 +18,6 @@ export class SkccListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.loading = true;
-    this.skccService.getSkccPage('')
-      .subscribe((skccResponse: ISkcc[]) => {
-        console.log(`skcclist: response received with count: ${skccResponse.length}`);
-        this.skccs = skccResponse;
-      });
   }
 
 }
