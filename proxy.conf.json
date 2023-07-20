@@ -1,0 +1,8 @@
+{
+  "/api/skcclist": {
+    "target": "https://localhost:3000/skcclist",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug"
+  }
+}

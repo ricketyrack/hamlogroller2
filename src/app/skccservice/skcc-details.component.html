@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="row title-bar">
+    <div class="col-md-3">
+      <h3>SKCC Members</h3>
+    </div>
+    <div class="col-md-8 title-component">
+      <h2>{{skcc?.callsign}} </h2>
+    </div>
+    <div class="col-md-1 title-component">
+      <button (click)="onList()">List</button>
+    </div>
+  </div>
+
+  <div class="item-box">
+    <div class="row">
+      <div class="row">
+        <div class="col-md-3">
+          Name: {{skcc?.name}}
+        </div>
+        <div class="col-md-3">
+          Member #: {{ skcc?.membernbr }}
+        </div>
+        <div class="col-md-3">
+          State: {{skcc?.statecd}}
+        </div>
+        <div class="col-md-3">
+          Member level: {{skcc?.memberlevel}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
