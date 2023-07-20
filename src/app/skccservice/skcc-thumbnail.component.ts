@@ -7,7 +7,7 @@ import { ISkcc } from './skcc.model'
   templateUrl: './skcc-thumbnail.component.html',
     styles: [`
       .pad-left   { margin-left: 10px; }
-      .well div   { color: #bbb; }
+      .well div   { color: #bbb; height: 50px; }
 
     `]
 })

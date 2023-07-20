@@ -7,7 +7,7 @@ import { SkccThumbnailComponent } from './skcc-thumbnail.component'
 @Component({
   selector: 'skcc-list',
   templateUrl: './skcc-list.component.html',
-  styleUrls: ['../../styles.scss']
+  styleUrls: ['./skcc-list.component.scss','../../styles.scss']
 })
 
 export class SkccListComponent implements OnInit {
@@ -20,9 +20,9 @@ export class SkccListComponent implements OnInit {
 
   ngOnInit() {
     this.loading = true;
-    this.skccService.getSkccs()
+    this.skccService.getSkccPage('')
       .subscribe((skccResponse: ISkcc[]) => {
-        console.log('skcclist: response received');
+        console.log(`skcclist: response received with count: ${skccResponse.length}`);
         this.skccs = skccResponse;
       });
   }

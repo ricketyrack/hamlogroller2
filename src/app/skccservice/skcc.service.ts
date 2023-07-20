@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { catchError, Observable, retry, throwError } from 'rxjs';
 import { FormGroup } from '@angular/forms';
 import { ISkcc } from './skcc.model';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 
 @Injectable()
 export class SkccService {
@@ -63,6 +63,19 @@ export class SkccService {
     return thisSkcc;
 
   } // getSkcc
+
+  getSkccPage(firstCall: string): Observable<ISkcc[]> {
+
+    console.log(`skcc-service: requesting a new page with first call: ${firstCall}`);
+
+    return this.http.get<ISkcc[]>('http://localhost:3000/skccpage',
+               { params: new HttpParams().set('firstcall', firstCall)})
+      .pipe(
+        retry(3),
+        catchError(this.handleError)
+      );
+
+  }
 
   setSkccList(skccList : ISkcc[]) {
     console.log('set skcc list is not imlemented');
