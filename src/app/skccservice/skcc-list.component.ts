@@ -11,6 +11,7 @@ import { ActivatedRoute } from '@angular/router'
 
 export class SkccListComponent implements OnInit {
   skccs: ISkcc[] = [];
+  nextURL: string = "";
   loading: boolean = false;
 
   constructor(private skccService: SkccService,
@@ -22,6 +23,7 @@ export class SkccListComponent implements OnInit {
     this.skccService.getSkccPage('').subscribe((daData : ISkcc[]) => {
       console.log(`skcc-list: response received from server with count: ${daData.length}`);
       this.skccs = daData;
+      this.nextURL = "http://localhost:3000/skccs/next/" + this.skccs[this.skccs.length - 1].callsign;
       this.skccs.forEach((skcc : ISkcc) => {
         this.skccService.saveSkcc(skcc);
       })

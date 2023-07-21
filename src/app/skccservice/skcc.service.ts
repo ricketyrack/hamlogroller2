@@ -43,18 +43,32 @@ export class SkccService {
 
     console.log(`saving skcc callsign: ${skcc?.callsign} member #: ${skcc?.membernbr}`);
 
-    localStorage.setItem(skcc.callsign, JSON.stringify(skcc));
+    localStorage.setItem("skcc|" + skcc.callsign, JSON.stringify(skcc));
 
     return true;
   } // saveSkcc
 
-  getSkcc(callsign: string) : ISkcc | undefined {
+  getSkcc(callsign: string) : ISkcc {
 
     console.log(`skcc-service: looking for skcc callsign: ${callsign}`);
 
-    const theSkcc = localStorage.getItem(callsign);
+    let theSkcc = localStorage.getItem("skcc|" + callsign);
 
-    let result: ISkcc | undefined = theSkcc ? JSON.parse(theSkcc) as ISkcc : undefined;
+    if (!theSkcc) {
+
+      const url = `http://localhost:3000/skcc/${callsign}`;
+
+      this.http.get<ISkcc>(url).subscribe(data => {
+        console.info(`skcc-service:  Callsign found in db: ${callsign}`);
+
+        localStorage.setItem("skcc|" + data.callsign, JSON.stringify(data));
+
+        return data;
+      });
+
+    }
+
+    let result: ISkcc = theSkcc ? JSON.parse(theSkcc) as ISkcc : { callsign: 'None' } as ISkcc;
 
     console.log(`skcc-service: results for lookup of callsign: ${callsign} are ${JSON.stringify(result)}`);
 
@@ -68,8 +82,10 @@ export class SkccService {
 
     console.log(`skcc-service: requesting a new page with first call: ${theFirstCall}`);
 
-    return this.http.get<ISkcc[]>('http://localhost:3000/skccpage',
-      { params: new HttpParams().set('firstcall', theFirstCall) });
+    const url = `http://localhost:3000/skccpage/${theFirstCall}`;
+
+    return this.http.get<ISkcc[]>(url);
+
   }
 
   setSkccList(skccList : ISkcc[]) {
