@@ -20,12 +20,12 @@ export class SkccDetailsComponent implements OnInit {
     }
 
   ngOnInit() {
-      console.log(`skcc-details: memberNbr is: ${this.route.snapshot.params['id']}`);
-      this.skcc = this.skccService.getSkcc(+this.route.snapshot.params['id']);
+      console.log(`skcc-details: callsign is: ${this.route.snapshot.params['callsign']}`);
+      this.skcc = this.skccService.getSkcc(this.route.snapshot.params['callsign']);
   }
 
   onList() {
-    this.router.navigate(["/skccs"]);
+    this.router.navigate(["/skccs/next/A"]);
   }
 
 }

@@ -10,10 +10,10 @@ import {
 import { Error404Component } from './errors/404.component';
 
 const routes: Routes = [
-  { path: 'skccs', component: SkccListComponent, title: 'Skcc Members', resolve: { skccs: skccListResolver } },
-  { path: 'skcc/:id', component: SkccDetailsComponent, canActivate: [canActivateSkcc] },
+  { path: 'skccs/next/:callsign', component: SkccListComponent, title: 'Skcc Members', resolve: { skccs: skccListResolver } },
+  { path: 'skcc/:callsign', component: SkccDetailsComponent, canActivate: [canActivateSkcc] },
   { path: '404', component: Error404Component },
-  { path: '', redirectTo: '/skccs', pathMatch: 'full' },
+  { path: '', redirectTo: '/skccs/next/A', pathMatch: 'full' },
   { path: '**', component: Error404Component }
 ];
 

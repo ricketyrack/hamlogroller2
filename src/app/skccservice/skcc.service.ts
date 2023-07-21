@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { catchError, Observable, retry, throwError } from 'rxjs';
-import { FormGroup } from '@angular/forms';
 import { ISkcc } from './skcc.model';
 import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 
@@ -44,18 +43,20 @@ export class SkccService {
 
     console.log(`saving skcc callsign: ${skcc?.callsign} member #: ${skcc?.membernbr}`);
 
-    localStorage.setItem(skcc.membernbr.toString(), JSON.stringify(skcc));
+    localStorage.setItem(skcc.callsign, JSON.stringify(skcc));
 
     return true;
   } // saveSkcc
 
-  getSkcc(memberNumber: number) : ISkcc | undefined {
+  getSkcc(callsign: string) : ISkcc | undefined {
 
-    console.log('skcc-service: looking for skcc member#:' + memberNumber);
+    console.log(`skcc-service: looking for skcc callsign: ${callsign}`);
 
-    const theSkcc = localStorage.getItem(memberNumber.toString());
+    const theSkcc = localStorage.getItem(callsign);
 
-    let result: ISkcc | undefined = theSkcc ? JSON.parse(theSkcc as string) as ISkcc : undefined;
+    let result: ISkcc | undefined = theSkcc ? JSON.parse(theSkcc) as ISkcc : undefined;
+
+    console.log(`skcc-service: results for lookup of callsign: ${callsign} are ${JSON.stringify(result)}`);
 
     return result;
 
@@ -63,10 +64,12 @@ export class SkccService {
 
   getSkccPage(firstCall: string): Observable<ISkcc[]> {
 
-    console.log(`skcc-service: requesting a new page with first call: ${firstCall}`);
+    const theFirstCall = !!firstCall && firstCall !== '' ? firstCall.toUpperCase() : '';
+
+    console.log(`skcc-service: requesting a new page with first call: ${theFirstCall}`);
 
     return this.http.get<ISkcc[]>('http://localhost:3000/skccpage',
-      { params: new HttpParams().set('firstcall', firstCall) });
+      { params: new HttpParams().set('firstcall', theFirstCall) });
   }
 
   setSkccList(skccList : ISkcc[]) {

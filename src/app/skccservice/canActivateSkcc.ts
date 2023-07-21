@@ -8,8 +8,8 @@ export const canActivateSkcc: CanActivateFn = (
   const skccService = inject(SkccService);
   const router = inject(Router);
 
-  const id = route.paramMap.get('id');
-  const skccExists = id != null && !!skccService.getSkcc(+id);
+  const callsign = route.paramMap.get('callsign');
+  const skccExists = !!callsign && !!skccService.getSkcc(callsign);
 
   if (!skccExists) {
     router.navigate(['/404'])
