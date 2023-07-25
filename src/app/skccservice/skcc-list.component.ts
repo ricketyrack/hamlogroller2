@@ -20,10 +20,9 @@ export class SkccListComponent implements OnInit {
 
   ngOnInit() {
     this.loading = true;
-    this.skccService.getSkccPage('').subscribe((daData : ISkcc[]) => {
+    this.skccService.getSkccs().subscribe((daData : ISkcc[]) => {
       console.log(`skcc-list: response received from server with count: ${daData.length}`);
       this.skccs = daData;
-      this.nextURL = "http://localhost:3000/skccs/next/" + this.skccs[this.skccs.length - 1].callsign;
       this.skccs.forEach((skcc : ISkcc) => {
         this.skccService.saveSkcc(skcc);
       })

@@ -7,5 +7,5 @@ import { map } from 'rxjs/operators'
 export const skccListResolver: ResolveFn<ISkcc[]> =
   (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) =>
   {
-    return inject(SkccService).getSkccPage(route.paramMap.get('callsign')!).pipe(map(skccs => skccs));
+    return inject(SkccService).getSkccs().pipe(map(skccs => skccs));
   }

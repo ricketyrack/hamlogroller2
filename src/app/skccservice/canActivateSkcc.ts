@@ -9,6 +9,7 @@ export const canActivateSkcc: CanActivateFn = (
   const router = inject(Router);
 
   const callsign = route.paramMap.get('callsign');
+  console.info(`canActivateSkcc: checking callsign: ${callsign}`);
   const skccExists = !!callsign && !!skccService.getSkcc(callsign);
 
   if (!skccExists) {

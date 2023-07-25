@@ -5,14 +5,26 @@
     </div>
   </div>
   <div class="row">
-    <div *ngFor="let skcc of skccs" class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
-      <skcc-thumbnail [skcc]="skcc">
-      </skcc-thumbnail>
+    <div class="col-xs-3 col-md-3">
+      Callsign
+    </div>
+    <div class="col-xs-3 col-md-3">
+      Name
+    </div>
+    <div class="col-xs-3 col-md-3">
+      Id
+    </div>
+    <div class="col-xs-3 col-md-2">
+      Exchange
+    </div>
+    <div class="col-xs-1 col-md-1">
+      Rank
     </div>
   </div>
-  <div class="pagination">
-    <div class="page-next">
-      <a href={{nextURL}}>Next -->></a>
+  <div class="row">
+    <div *ngFor="let skcc of skccs" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <skcc-thumbnail [skcc]="skcc">
+      </skcc-thumbnail>
     </div>
   </div>
 </div>

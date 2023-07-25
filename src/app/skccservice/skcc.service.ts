@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { catchError, Observable, retry, throwError } from 'rxjs';
 import { ISkcc } from './skcc.model';
-import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 @Injectable()
 export class SkccService {
@@ -30,6 +30,8 @@ export class SkccService {
 
     // this url should be mapped in the proxy.conf.json or similar file
     // to handle CORS
+
+    console.info('getSkccs:  requesting full list');
 
     return this.http.get<ISkcc[]>('http://localhost:3000/skcclist')
       .pipe(
@@ -76,15 +78,19 @@ export class SkccService {
 
   } // getSkcc
 
-  getSkccPage(firstCall: string): Observable<ISkcc[]> {
+  getSkccPage(callsign: string): Observable<ISkcc[]> {
 
-    const theFirstCall = !!firstCall && firstCall !== '' ? firstCall.toUpperCase() : '';
+    const theFirstCall = !!callsign && callsign !== '' ? callsign.toUpperCase() : '';
 
     console.log(`skcc-service: requesting a new page with first call: ${theFirstCall}`);
 
     const url = `http://localhost:3000/skccpage/${theFirstCall}`;
 
-    return this.http.get<ISkcc[]>(url);
+    return this.http.get<ISkcc[]>(url)
+      .pipe(
+        retry(3),
+        catchError(this.handleError)
+      );
 
   }
 
